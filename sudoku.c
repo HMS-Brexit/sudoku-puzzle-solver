@@ -1054,6 +1054,15 @@ void solve(int ** matrix)
 		puzzle->initialPuzzle[i/9][i%9]=(uint8_t)(matrix[i/9][i%9]%9);
 	}
 	copyInitialPuzzleToSolutionMatrix(puzzle);
+	//check for invalid input
+	for(uint8_t i=0; i<81; i++)
+	{
+		if(puzzle->initialPuzzle[i/9][i%9]!=puzzle->solutionpuzzle[i/9][i%9])
+		{
+			freePuzzle(puzzle);
+			return;		
+		}
+	}
 	createEmptyCellMatrix(puzzle);
 	singlePossibleSolutions(puzzle);
 	fullSolve(puzzle);
