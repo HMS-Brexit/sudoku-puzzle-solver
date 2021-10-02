@@ -418,15 +418,15 @@ struct sudoku* newPuzzle()
 	struct sudoku * puzzle = (struct sudoku *) malloc(sizeof(struct sudoku));
 	assert(puzzle);
 	//assert(puzzle->initialPuzzle);
-	puzzle->initialPuzzle = (uint8_t **) malloc(81*sizeof(uint8_t *));
+	puzzle->initialPuzzle = (uint8_t **) malloc(9*sizeof(uint8_t *));
 	assert(puzzle->initialPuzzle);
-	puzzle->solutionPuzzle = (uint8_t **) malloc(81*sizeof(uint8_t *));
-	puzzle->possibilitiesMatrix = (bool ***) malloc(729*sizeof(bool **));
+	puzzle->solutionPuzzle = (uint8_t **) malloc(9*sizeof(uint8_t *));
+	puzzle->possibilitiesMatrix = (bool ***) malloc(9*sizeof(bool **));
 	for(uint8_t row=0; row<9; row++)
 	{
 		puzzle->initialPuzzle[row] = (uint8_t *) malloc(9*sizeof(uint8_t));
 		puzzle->solutionPuzzle[row] = (uint8_t *) malloc(9*sizeof(uint8_t));
-		puzzle->possibilitiesMatrix[row] = (bool **) malloc(81*sizeof(bool *));
+		puzzle->possibilitiesMatrix[row] = (bool **) malloc(9*sizeof(bool *));
 		for(uint8_t col=0; col<9; col++)
 		{
 			puzzle->initialPuzzle[row][col]=0;
@@ -1057,7 +1057,7 @@ void solve(int ** matrix)
 	//check for invalid input
 	for(uint8_t i=0; i<81; i++)
 	{
-		if(puzzle->initialPuzzle[i/9][i%9]!=puzzle->solutionpuzzle[i/9][i%9])
+		if(puzzle->initialPuzzle[i/9][i%9]!=puzzle->solutionPuzzle[i/9][i%9])
 		{
 			freePuzzle(puzzle);
 			return;		
